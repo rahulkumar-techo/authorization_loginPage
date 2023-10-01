@@ -55,18 +55,18 @@ userSchema.pre("save", async function (next) {
       // sign(payload,secret_key,options)
       // STORE AT DB.
       // AFTER GENERATING TOKEN DONT'T FORGET TO SAVE IT.
-      userSchema.methods.generateJWT =async function() {
-
+      userSchema.methods.generateJWT = async function() {
         try {
-          let token = Jwt.sign({_id:this._id},process.env.SECRET_KEY,{expiresIn:'1h'});
-          this.tokens = this.tokens.concate({token});
-          await this.save()
-          return token;
+            let token = Jwt.sign({_id: this._id}, process.env.SECRET_KEY, {expiresIn: '1d'});
+            this.tokens = this.tokens.concat({token});
+            await this.save();
+            return token;
         } catch (error) {
-          resizeBy.status(400).json({error})
+            console.error("Error generating JWT:", error);
+            throw error; // Throw the error so the calling function can handle it.
         }
-      }
-
+    }
+    
 
 const User = model("User", userSchema);
 
