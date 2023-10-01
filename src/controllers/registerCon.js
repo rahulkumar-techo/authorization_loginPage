@@ -25,7 +25,7 @@ const registerCon = async (req, res) => {
     });
 
     // CALLING TOKEN FROM SCHEMA
-    const token = await userData.generateJWT();
+    const token = await userData.generateJWT(); 
 
     res.status(200).json({ message: "saved at data base", userData });
   } catch (error) {
