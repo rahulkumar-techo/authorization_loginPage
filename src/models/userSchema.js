@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
 import bcrypt from "bcryptjs";
+import  Jwt  from "jsonwebtoken";
 
 const userSchema = new Schema(
   {
@@ -27,6 +28,14 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    tokens:[
+      {
+        token:{
+          type: String,
+          required: true,
+        }
+      }
+    ]
   },
   { timestamps: true }
 );
@@ -41,7 +50,22 @@ userSchema.pre("save", async function (next) {
 
   next();
 });
+      //GENERATE TOKEN 
+      // USE NORMAL FUNCTION
+      // sign(payload,secret_key,options)
+      // STORE AT DB.
+      // AFTER GENERATING TOKEN DONT'T FORGET TO SAVE IT.
+      userSchema.methods.generateJWT =async function() {
 
+        try {
+          let token = Jwt.sign({_id:this._id},process.env.SECRET_KEY,{expiresIn:'1h'});
+          this.tokens = this.tokens.concate({token});
+          await this.save()
+          return token;
+        } catch (error) {
+          resizeBy.status(400).json({error})
+        }
+      }
 
 
 const User = model("User", userSchema);

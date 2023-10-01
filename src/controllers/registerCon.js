@@ -15,9 +15,12 @@ const registerCon = async (req, res) => {
       return res.status(400).json({ message: "Fill all inputs" });
 
     if (password !== cpassword)
-      return res.status(400).json({ message: "password should be Matched" });
+      return res.status(400).json({ message: "password should be Matched" }); 
 
-  
+       // GENERATE JWT TOKEN
+       // CALLING FROM SCHEMA
+       const token = await user.generateJWT();
+
     const userData = await User.create({
       name,
       email,
