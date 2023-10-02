@@ -1,0 +1,87 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.custom__homePage {
+  background-image: url("https://c4.wallpaperflare.com/wallpaper/364/854/488/digital-art-photoshop-concept-art-futuristic-wallpaper-preview.jpg"),
+    linear-gradient(rgb(39, 32, 32), rgba(51, 46, 46, 0.26) 3%);
+  min-height: 70vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#loading {
+  animation: rotate 4s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  40% {
+    transform: rotate(90deg);
+  }
+  60% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* #toggleNav{
+
+  } */
+
+#menuIcon {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  #toggleNav,
+  .visible {
+    display: none;
+    flex-direction: column;
+    padding: 0.6rem 1rem;
+    position: absolute;
+    right: 0;
+    top: 6.5rem;
+    z-index: 99;
+    background-color: rgba(16, 77, 168, 0.76);
+    gap: 2rem;
+    height: 70vh;
+    width: 60%;
+  }
+
+  #toggleNav.visible {
+    display: flex;
+  }
+
+  #menuIcon {
+    display: block;
+  }
+}
+
+/* For Chrome, Safari, and newer versions of Opera */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+
+}
+
+.input-error {
+  border-bottom:2px solid  red;
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+}
