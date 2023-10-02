@@ -9,10 +9,9 @@ const loginCon = async (req,res) => {
 
          const user = await User.findOne({ email });
             if (!user) return res.status(401).json({ message: 'email or Password not Matched' });
-
             
 
-
+            
             res.status(200).json({message:"login",user})
         
   } catch (error) {

@@ -26,6 +26,14 @@ const registerCon = async (req, res) => {
 
     // CALLING TOKEN FROM SCHEMA
     const token = await userData.generateJWT(); 
+    //TO SET TOKEN IN COOKIE 
+    // will be expire in 24 = 8hrs = 6400000ms 
+    res.cookie("jwtToken", token, {
+      expires: new Date(Date.now() + 86400000),
+      httpOnly: true,
+      sameSite: 'none', 
+      secure: true
+  });
 
     res.status(200).json({ message: "saved at data base", userData });
   } catch (error) {
